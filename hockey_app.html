@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="broadcast">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IIHF WM 2026 · Прогнозы</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Barlow+Condensed:wght@500;600;700;800;900&family=JetBrains+Mono:wght@500;700&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.24.7/babel.min.js"></script>
+
+<div id="root"><div style="min-height:100vh;background:#05060a;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px"><div style="font-size:48px">🏒</div><div style="color:rgba(255,255,255,.5);font-size:.95rem;font-family:system-ui">Загрузка...</div></div></div>
+
+<style>
+/* ─────────────────────────────────────────────────────────────
+   PREMIUM BROADCAST — 3 THEMES via [data-theme]
+   ───────────────────────────────────────────────────────────── */
+
+/* ═══ THEME 1: BROADCAST (ESPN/DAZN — чёрный + алый) ═══ */
+html[data-theme="broadcast"]{
+  --bg:#08090d;
+  --bg-grad:radial-gradient(ellipse 90% 60% at 50% -10%,rgba(230,30,45,.10),transparent 60%),linear-gradient(180deg,#0a0b10 0%,#05060a 100%);
+  --surf:#0f1117;
+  --surf-2:#141720;
+  --surf-elev:#1a1e29;
+  --ink:#ffffff;
+  --ink-2:rgba(255,255,255,.62);
+  --ink-3:rgba(255,255,255,.38);
+  --ink-4:rgba(255,255,255,.18);
+  --bdr:rgba(255,255,255,.07);
+  --bdr-2:rgba(255,255,255,.12);
+  --acc:#e61e2d;
+  --acc-2:#ff3847;
+  --acc-grad:linear-gradient(135deg,#ff3847 0%,#c9121f 100%);
+  --acc-glow:rgba(230,30,45,.45);
+  --gold:#ffb020;
+  --grn:#22c55e;
+  --red:#ef4444;
+  --font-display:'Barlow Condensed',system-ui,sans-serif;
+  --font-body:'Archivo',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,monospace;
+  --radius:6px;
+  --radius-lg:10px;
+  --radius-xl:14px;
+  --card-bg:linear-gradient(180deg,#12141c 0%,#0d0f15 100%);
+  --card-bdr:rgba(255,255,255,.06);
+  --header-bg:rgba(8,9,13,.85);
+  --header-bdr:rgba(230,30,45,.15);
+  --score-font-weight:900;
+  --display-tracking:-0.01em;
+  --eyebrow-tracking:0.18em;
+}
+
+/* ═══ THEME 2: ICE ARENA (стеклянный лёд, cyan/белый) ═══ */
+html[data-theme="ice"]{
+  --bg:#06101c;
+  --bg-grad:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(0,170,255,.18),transparent 55%),radial-gradient(ellipse 60% 40% at 100% 100%,rgba(120,220,255,.08),transparent 60%),linear-gradient(180deg,#08131f 0%,#050a12 100%);
+  --surf:rgba(255,255,255,.04);
+  --surf-2:rgba(255,255,255,.06);
+  --surf-elev:rgba(255,255,255,.09);
+  --ink:#f2fbff;
+  --ink-2:rgba(220,240,255,.68);
+  --ink-3:rgba(200,225,245,.42);
+  --ink-4:rgba(180,210,235,.22);
+  --bdr:rgba(140,210,255,.1);
+  --bdr-2:rgba(140,210,255,.18);
+  --acc:#5ec8ff;
+  --acc-2:#9fddff;
+  --acc-grad:linear-gradient(135deg,#9fddff 0%,#3ba8ff 100%);
+  --acc-glow:rgba(94,200,255,.4);
+  --gold:#ffd56b;
+  --grn:#7cf0a8;
+  --red:#ff8a8a;
+  --font-display:'Space Grotesk',system-ui,sans-serif;
+  --font-body:'Manrope',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,monospace;
+  --radius:14px;
+  --radius-lg:18px;
+  --radius-xl:24px;
+  --card-bg:linear-gradient(180deg,rgba(255,255,255,.055) 0%,rgba(255,255,255,.02) 100%);
+  --card-bdr:rgba(140,210,255,.12);
+  --header-bg:rgba(6,16,28,.6);
+  --header-bdr:rgba(140,210,255,.12);
+  --score-font-weight:600;
+  --display-tracking:-0.025em;
+  --eyebrow-tracking:0.14em;
+}
+
+/* ═══ THEME 3: STADIUM NIGHT (глубокий синий + золото/неон) ═══ */
+html[data-theme="stadium"]{
+  --bg:#0a0f24;
+  --bg-grad:radial-gradient(ellipse 70% 50% at 30% 10%,rgba(255,200,70,.07),transparent 55%),radial-gradient(ellipse 90% 60% at 80% 90%,rgba(40,80,255,.12),transparent 60%),linear-gradient(180deg,#0c1126 0%,#060814 100%);
+  --surf:#0f1531;
+  --surf-2:#131a3d;
+  --surf-elev:#1a2149;
+  --ink:#ffffff;
+  --ink-2:rgba(220,225,255,.7);
+  --ink-3:rgba(200,210,245,.44);
+  --ink-4:rgba(180,195,235,.22);
+  --bdr:rgba(140,160,240,.1);
+  --bdr-2:rgba(180,200,255,.18);
+  --acc:#ffcc4d;
+  --acc-2:#ffdc7a;
+  --acc-grad:linear-gradient(135deg,#ffdc7a 0%,#f4a91d 100%);
+  --acc-glow:rgba(255,204,77,.35);
+  --gold:#ffcc4d;
+  --grn:#5effa5;
+  --red:#ff6f8f;
+  --font-display:'Archivo',system-ui,sans-serif;
+  --font-body:'Manrope',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,monospace;
+  --radius:10px;
+  --radius-lg:14px;
+  --radius-xl:20px;
+  --card-bg:linear-gradient(180deg,rgba(26,33,73,.7) 0%,rgba(15,21,49,.7) 100%);
+  --card-bdr:rgba(140,160,240,.12);
+  --header-bg:rgba(10,15,36,.82);
+  --header-bdr:rgba(255,204,77,.15);
+  --score-font-weight:800;
+  --display-tracking:-0.015em;
+  --eyebrow-tracking:0.16em;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden}
+body{font-family:var(--font-body);font-feature-settings:"ss01","ss02","cv11";-webkit-font-smoothing:antialiased;letter-spacing:-.005em;background:var(--bg-grad);background-attachment:fixed}
+
+/* ─── Typography primitives ─── */
+.t-display{font-family:var(--font-display);font-weight:900;letter-spacing:var(--display-tracking);line-height:.95;text-transform:uppercase}
+.t-eyebrow{font-family:var(--font-body);font-weight:700;letter-spacing:var(--eyebrow-tracking);text-transform:uppercase;font-size:.62rem}
+.t-mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.t-score{font-family:var(--font-display);font-weight:var(--score-font-weight);font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1}
+
+/* ─── Animations ─── */
+@keyframes fl0{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-26px) rotate(180deg)}}
+@keyframes fl1{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px) rotate(-70deg)}}
+@keyframes fl2{0%,100%{transform:translateY(0)}50%{transform:translateY(-36px) rotate(250deg)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 0 0 var(--acc-glow)}50%{box-shadow:0 0 0 8px transparent}}
+@keyframes popIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+@keyframes tickNum{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+@keyframes liveDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.85)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+
+/* ─── Card ─── */
+.card{animation:fadeUp .28s cubic-bezier(.2,.8,.2,1) forwards;border-radius:var(--radius-lg);background:var(--card-bg);overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s;border:1px solid var(--card-bdr);position:relative}
+html[data-theme="ice"] .card{backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%)}
+.card:hover{transform:translateY(-1px);border-color:var(--bdr-2)}
+html[data-theme="broadcast"] .card:hover{box-shadow:0 8px 32px rgba(230,30,45,.08)}
+html[data-theme="ice"] .card:hover{box-shadow:0 8px 40px rgba(94,200,255,.12)}
+html[data-theme="stadium"] .card:hover{box-shadow:0 8px 32px rgba(255,204,77,.10)}
+
+/* ─── Buttons ─── */
+.btn{background:var(--acc-grad);color:#fff;border:none;border-radius:var(--radius);padding:11px 22px;font-weight:800;cursor:pointer;transition:transform .15s,box-shadow .2s,filter .2s;font-size:.82rem;white-space:nowrap;letter-spacing:.01em;font-family:var(--font-body);text-transform:uppercase}
+html[data-theme="broadcast"] .btn{text-transform:uppercase;letter-spacing:.06em}
+html[data-theme="ice"] .btn{text-transform:none;letter-spacing:-.01em;color:#06101c;background:var(--acc-grad)}
+html[data-theme="stadium"] .btn{color:#0a0f24;letter-spacing:.04em}
+.btn:hover:not(:disabled){transform:translateY(-1px);filter:brightness(1.08);box-shadow:0 6px 24px var(--acc-glow)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.ghost{background:var(--surf-2);color:var(--ink-2);border:1px solid var(--bdr);border-radius:var(--radius);padding:8px 14px;font-size:.76rem;cursor:pointer;transition:all .15s;font-weight:700;font-family:var(--font-body)}
+.ghost:hover{background:var(--surf-elev);color:var(--ink);border-color:var(--bdr-2)}
+
+/* ─── Tabs ─── */
+.tab{padding:10px 22px;border-radius:100px;border:1px solid transparent;cursor:pointer;font-weight:800;font-size:.82rem;transition:all .2s;font-family:var(--font-body);letter-spacing:.02em;background:transparent;color:var(--ink-3)}
+.tab[data-active="true"]{background:var(--acc-grad);color:#fff;box-shadow:0 4px 20px var(--acc-glow)}
+html[data-theme="ice"] .tab[data-active="true"]{color:#06101c}
+html[data-theme="stadium"] .tab[data-active="true"]{color:#0a0f24}
+.tab:not([data-active="true"]){background:var(--surf);border-color:var(--bdr)}
+.tab:not([data-active="true"]):hover{background:var(--surf-2);color:var(--ink-2)}
+
+/* ─── Filter chips ─── */
+.flt{padding:6px 14px;border-radius:100px;cursor:pointer;font-size:.76rem;font-weight:700;transition:all .15s;border:1px solid var(--bdr);background:var(--surf);color:var(--ink-3);font-family:var(--font-body)}
+.flt[data-active="true"]{background:var(--surf-elev);color:var(--acc);border-color:var(--acc)}
+.flt:hover{color:var(--ink-2)}
+
+/* ─── Score inputs ─── */
+.si{background:var(--surf-2);border:1.5px solid var(--bdr-2);color:var(--ink);text-align:center;font-size:1.35rem;font-weight:800;font-family:var(--font-display);border-radius:var(--radius);width:52px;height:52px;transition:all .15s;font-variant-numeric:tabular-nums}
+html[data-theme="ice"] .si{font-family:var(--font-display);font-weight:600;backdrop-filter:blur(8px)}
+.si:focus{border-color:var(--acc);box-shadow:0 0 0 3px var(--acc-glow);outline:none;background:var(--surf-elev)}
+
+/* ─── Auth inputs ─── */
+.ai{background:var(--surf-2);border:1px solid var(--bdr-2);color:var(--ink);border-radius:var(--radius);padding:14px 16px;width:100%;font-size:.92rem;transition:all .15s;font-family:var(--font-body)}
+.ai:focus{border-color:var(--acc);outline:none;box-shadow:0 0 0 3px var(--acc-glow)}
+.ai::placeholder{color:var(--ink-3)}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bdr-2);border-radius:2px}
+::-webkit-scrollbar-thumb:hover{background:var(--acc)}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+/* ─── Broadcast-specific: diagonal accent bar ─── */
+html[data-theme="broadcast"] .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--acc);opacity:0;transition:opacity .2s}
+html[data-theme="broadcast"] .card:hover::before{opacity:1}
+
+/* ─── Ice-specific: subtle inner glow ─── */
+html[data-theme="ice"] .card::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(135deg,rgba(255,255,255,.04) 0%,transparent 50%);pointer-events:none}
+
+/* ─── Stadium-specific: top gold line ─── */
+html[data-theme="stadium"] .card{position:relative}
+
+/* ─── Theme switcher ─── */
+.theme-switcher{position:fixed;bottom:14px;right:14px;z-index:80;background:var(--surf-elev);border:1px solid var(--bdr-2);border-radius:100px;padding:5px;display:flex;gap:2px;box-shadow:0 8px 32px rgba(0,0,0,.5);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.theme-chip{border:none;background:transparent;color:var(--ink-3);padding:7px 13px;border-radius:100px;font-size:.7rem;font-weight:700;cursor:pointer;transition:all .15s;font-family:var(--font-body);letter-spacing:.02em;white-space:nowrap}
+.theme-chip[data-active="true"]{background:var(--acc-grad);color:#fff}
+html[data-theme="ice"] .theme-chip[data-active="true"]{color:#06101c}
+html[data-theme="stadium"] .theme-chip[data-active="true"]{color:#0a0f24}
+
+/* ─── Badges / pills ─── */
+.pill{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:100px;font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-family:var(--font-body)}
+.pill-live{background:var(--red);color:#fff}
+.pill-live::before{content:"";width:5px;height:5px;border-radius:50%;background:#fff;animation:liveDot 1.4s ease-in-out infinite}
+.pill-group{background:var(--surf-elev);color:var(--ink-2);border:1px solid var(--bdr)}
+.pill-playoff{background:linear-gradient(135deg,var(--gold),#d48f12);color:#1a1200;border:none}
+.pill-win{background:rgba(34,197,94,.16);color:var(--grn);border:1px solid rgba(34,197,94,.3)}
+
+/* ─── Team color bar ─── */
+.team-bar{height:3px;background:linear-gradient(90deg,var(--th) 0%,var(--th) 40%,transparent 50%,var(--ta) 60%,var(--ta) 100%)}
+html[data-theme="ice"] .team-bar{height:2px;opacity:.8}
+
+/* ─── VS pill ─── */
+.vs-pill{background:var(--surf-elev);border:1px solid var(--bdr-2);border-radius:var(--radius);padding:4px 14px;font-family:var(--font-display);font-weight:800;font-size:.9rem;color:var(--acc);letter-spacing:.15em}
+
+/* ─── Header ─── */
+.header{position:sticky;top:0;z-index:50;background:var(--header-bg);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--header-bdr);padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand-title{font-family:var(--font-display);font-weight:900;font-size:1.15rem;letter-spacing:var(--display-tracking);line-height:1;color:var(--ink);text-transform:uppercase}
+html[data-theme="broadcast"] .brand-title{background:linear-gradient(90deg,#fff 0%,#ff3847 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+html[data-theme="ice"] .brand-title{background:linear-gradient(90deg,#fff 0%,#5ec8ff 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+html[data-theme="stadium"] .brand-title{background:linear-gradient(90deg,#fff 0%,#ffcc4d 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.brand-eyebrow{color:var(--ink-3);font-size:.58rem;letter-spacing:var(--eyebrow-tracking);margin-top:3px;font-weight:700;text-transform:uppercase}
+
+/* ─── Logo mark ─── */
+.logo-mark{width:36px;height:36px;border-radius:var(--radius);background:var(--acc-grad);display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 4px 16px var(--acc-glow);flex-shrink:0}
+html[data-theme="ice"] .logo-mark{background:linear-gradient(135deg,rgba(255,255,255,.2),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(8px)}
+
+/* ─── Day divider ─── */
+.day-divider{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.day-divider-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--bdr-2),transparent)}
+.day-divider-label{color:var(--ink-3);font-family:var(--font-body);font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:var(--eyebrow-tracking);white-space:nowrap}
+
+/* ─── Countdown ─── */
+.countdown{background:var(--card-bg);border:1px solid var(--card-bdr);border-radius:var(--radius-xl);padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;position:relative;overflow:hidden}
+html[data-theme="broadcast"] .countdown::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--acc-grad)}
+html[data-theme="ice"] .countdown{backdrop-filter:blur(20px) saturate(140%)}
+.cd-unit{text-align:center;min-width:56px}
+.cd-num{font-family:var(--font-display);font-weight:900;font-size:2.1rem;color:var(--acc);font-variant-numeric:tabular-nums;line-height:1;letter-spacing:-.02em}
+.cd-label{font-family:var(--font-body);font-size:.55rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:var(--eyebrow-tracking);margin-top:4px;font-weight:700}
+.cd-sep{color:var(--ink-4);font-size:1.4rem;font-weight:300;margin-bottom:10px;font-family:var(--font-display)}
+
+/* ─── Team name ─── */
+.team-name{font-family:var(--font-display);font-weight:800;font-size:.95rem;text-align:center;line-height:1.15;letter-spacing:var(--display-tracking);text-transform:uppercase;color:var(--ink)}
+html[data-theme="ice"] .team-name{font-weight:600;text-transform:none;letter-spacing:-.015em;font-size:.92rem}
+
+/* ─── Venue text ─── */
+.venue-text{color:var(--ink-4);font-size:.6rem;text-align:center;line-height:1.3;max-width:100px;font-weight:500}
+
+/* ─── Match meta ─── */
+.match-time{color:var(--ink-3);font-size:.7rem;font-weight:700;font-family:var(--font-mono);letter-spacing:.02em}
+
+/* ─── Flag ─── */
+.flag{font-size:34px;line-height:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}
+html[data-theme="ice"] .flag{filter:drop-shadow(0 2px 8px rgba(94,200,255,.15))}
+
+/* ─── Stat tile (for leaderboard) ─── */
+.lb-row{display:flex;align-items:center;gap:12px;padding:12px 16px;margin-bottom:7px;background:var(--card-bg);border:1px solid var(--card-bdr);border-radius:var(--radius-lg);transition:transform .15s,border-color .15s}
+.lb-row:hover{transform:translateX(3px);border-color:var(--bdr-2)}
+.lb-rank{color:var(--ink-4);font-weight:800;font-size:.95rem;min-width:28px;text-align:center;font-family:var(--font-display)}
+.lb-pts{color:var(--acc);font-weight:900;font-size:1.15rem;font-family:var(--font-display);font-variant-numeric:tabular-nums}
+
+/* ─── Empty state ─── */
+.empty{text-align:center;padding:60px 20px}
+.empty-icon{font-size:46px;margin-bottom:14px;opacity:.6}
+.empty-title{color:var(--ink);font-family:var(--font-display);font-weight:800;font-size:1.2rem;margin-bottom:8px;text-transform:uppercase;letter-spacing:var(--display-tracking)}
+html[data-theme="ice"] .empty-title{text-transform:none}
+.empty-sub{color:var(--ink-3);font-size:.88rem}
+
+/* ─── Placeholder background pattern (broadcast-only diagonal stripes) ─── */
+html[data-theme="broadcast"] body::before{content:"";position:fixed;inset:0;background-image:repeating-linear-gradient(135deg,transparent 0,transparent 60px,rgba(230,30,45,.012) 60px,rgba(230,30,45,.012) 61px);pointer-events:none;z-index:0}
+</style>
+
+<script type="text/babel" data-presets="react">
+const {useState,useEffect,useMemo,memo,useRef}=React;
+
+const SUPA='https://uzvdmlqbsylxzikfqsum.supabase.co';
+const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV6dmRtbHFic3lseHppa2Zxc3VtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyNDQyODEsImV4cCI6MjA4NzgyMDI4MX0.csZNRs1POrpzflzwe5_pskZt2hg0LiH8Ib9-ZvFvDSU';
+
+const FLAGS={FIN:'🇫🇮',GER:'🇩🇪',CAN:'🇨🇦',SWE:'🇸🇪',USA:'🇺🇸',SUI:'🇨🇭',CZE:'🇨🇿',DEN:'🇩🇰',GBR:'🇬🇧',AUT:'🇦🇹',SVK:'🇸🇰',NOR:'🇳🇴',HUN:'🇭🇺',LAT:'🇱🇻',SLO:'🇸🇮',ITA:'🇮🇹',TBD:'❓'};
+const NAMES={FIN:'Finland',GER:'Germany',CAN:'Canada',SWE:'Sweden',USA:'USA',SUI:'Switzerland',CZE:'Czechia',DEN:'Denmark',GBR:'Gt. Britain',AUT:'Austria',SVK:'Slovakia',NOR:'Norway',HUN:'Hungary',LAT:'Latvia',SLO:'Slovenia',ITA:'Italy',TBD:'TBD'};
+const TCOLS={FIN:'#003899',GER:'#1a1a1a',CAN:'#cc1122',SWE:'#006aa7',USA:'#002868',SUI:'#cc1122',CZE:'#d7141a',DEN:'#c60c30',GBR:'#012169',AUT:'#ed2939',SVK:'#0b4ea2',NOR:'#ef2b2d',HUN:'#588157',LAT:'#8b2635',SLO:'#003da5',ITA:'#009246',TBD:'#333'};
+const PTCLS=Array.from({length:15},(_,i)=>({e:['🏒','❄️','⭐','🧊','✨','❄️'][i%6],l:((i*37+13)%97)+'%',t:((i*23+7)%93)+'%',s:(i%3)*6+11,o:(i%4)*.022+.03,d:(i%4)*2+6,dl:-(i*1.4),a:`fl${i%3}`}));
+
+// Storage: localStorage with graceful fallback
+const S={
+  get:k=>{try{return localStorage.getItem(k);}catch{return null;}},
+  set:(k,v)=>{try{localStorage.setItem(k,v);}catch{}},
+  del:k=>{try{localStorage.removeItem(k);}catch{}}
+};
+
+const rq=async(m,t,q='',body,tok)=>{
+  try{
+    const r=await fetch(`${SUPA}/rest/v1/${t}${q}`,{method:m,headers:{apikey:KEY,Authorization:`Bearer ${tok||KEY}`,'Content-Type':'application/json',Prefer:'return=representation'},body:body?JSON.stringify(body):undefined});
+    if(r.status>=400||r.status===204)return null;
+    return r.json();
+  }catch{return null;}
+};
+const authFetch=async(path,body)=>{try{return(await fetch(`${SUPA}/auth/v1/${path}`,{method:'POST',headers:{apikey:KEY,'Content-Type':'application/json'},body:JSON.stringify(body)})).json();}catch{return{};}};
+const calcPts=(p,m)=>{
+  if(m.home_score==null)return null;
+  if(p.pred_home===m.home_score&&p.pred_away===m.away_score)return 3;
+  return Math.sign(p.pred_home-p.pred_away)===Math.sign(m.home_score-m.away_score)?1:0;
+};
+const byDay=arr=>{const g={};arr.forEach(m=>{const k=new Date(m.match_time).toLocaleDateString('ru-RU',{weekday:'long',day:'numeric',month:'long'});if(!g[k])g[k]=[];g[k].push(m);});return Object.entries(g);};
+
+// Animated background (subtle — only shows on dark themes, styled per theme)
+const Bg=memo(()=>(
+  <div style={{position:'fixed',inset:0,overflow:'hidden',pointerEvents:'none',zIndex:0}}>
+    <div style={{position:'absolute',inset:0,backgroundImage:'linear-gradient(var(--bdr) 1px,transparent 1px),linear-gradient(90deg,var(--bdr) 1px,transparent 1px)',backgroundSize:'56px 56px',opacity:.35,maskImage:'radial-gradient(ellipse 80% 60% at 50% 30%,#000 30%,transparent 80%)'}}/>
+    {PTCLS.map((p,i)=><div key={i} style={{position:'absolute',left:p.l,top:p.t,fontSize:p.s,opacity:p.o*.7,animation:`${p.a} ${p.d}s ease-in-out ${p.dl}s infinite`}}>{p.e}</div>)}
+  </div>
+));
+
+// Theme switcher
+const ThemeSwitcher=({theme,onChange})=>(
+  <div className="theme-switcher" role="group" aria-label="Theme">
+    {[['broadcast','Broadcast'],['ice','Ice'],['stadium','Stadium']].map(([id,l])=>(
+      <button key={id} className="theme-chip" data-active={theme===id} onClick={()=>onChange(id)}>{l}</button>
+    ))}
+  </div>
+);
+
+// Tournament countdown
+const Countdown=()=>{
+  const [t,setT]=useState(null);
+  useEffect(()=>{
+    const target=new Date('2026-05-15T14:20:00Z');
+    const tick=()=>{const diff=target-Date.now();if(diff<=0){setT(null);return;}setT({d:Math.floor(diff/864e5),h:Math.floor(diff%864e5/36e5),m:Math.floor(diff%36e5/6e4),s:Math.floor(diff%6e4/1e3)});};
+    tick();const id=setInterval(tick,1000);return()=>clearInterval(id);
+  },[]);
+  if(!t)return null;
+  const C=({v,l})=>(
+    <div className="cd-unit">
+      <div key={v} className="cd-num" style={{animation:'tickNum .15s ease'}}>{String(v).padStart(2,'0')}</div>
+      <div className="cd-label">{l}</div>
+    </div>
+  );
+  return(
+    <div className="countdown">
+      <div style={{flex:1,minWidth:140}}>
+        <div className="t-eyebrow" style={{color:'var(--ink-3)'}}>До стартового свистка</div>
+        <div style={{color:'var(--ink)',fontFamily:'var(--font-display)',fontWeight:800,fontSize:'1.05rem',marginTop:5,letterSpacing:'var(--display-tracking)',textTransform:'uppercase'}}>IIHF WM 2026 · Switzerland</div>
+      </div>
+      <div style={{display:'flex',gap:10,alignItems:'center'}}>
+        <C v={t.d} l="дней"/><div className="cd-sep">:</div>
+        <C v={t.h} l="часов"/><div className="cd-sep">:</div>
+        <C v={t.m} l="минут"/><div className="cd-sep">:</div>
+        <C v={t.s} l="сек"/>
+      </div>
+    </div>
+  );
+};
+
+function App(){
+  const [sess,setSess]=useState(()=>{const t=S.get('hk_tok');return t?{tok:t}:null;});
+  const [user,setUser]=useState(null);
+  const [tab,setTab]=useState('matches');
+  const [filter,setFilter]=useState('all');
+  const [matches,setMatches]=useState([]);
+  const [myPreds,setMyPreds]=useState({});
+  const [inputs,setInputs]=useState({});
+  const [saving,setSaving]=useState({});
+  const [flash,setFlash]=useState({});
+  const [allPreds,setAllPreds]=useState([]);
+  const [profs,setProfs]=useState({});
+  const [showAuth,setShowAuth]=useState(false);
+  const [mode,setMode]=useState('signin');
+  const [fd,setFd]=useState({email:'',pwd:'',name:''});
+  const [msg,setMsg]=useState('');
+  const [busy,setBusy]=useState(false);
+  const [adminId,setAdminId]=useState(null);
+  const [adminS,setAdminS]=useState({h:'',a:''});
+  const [theme,setTheme]=useState(()=>S.get('hk_theme')||'broadcast');
+  const now=useMemo(()=>new Date(),[]);
+
+  useEffect(()=>{document.documentElement.setAttribute('data-theme',theme);S.set('hk_theme',theme);},[theme]);
+
+  useEffect(()=>{
+    const hash=new URLSearchParams(window.location.hash.slice(1));
+    const tok=hash.get('access_token');
+    if(tok){
+      if(window.opener){window.opener.postMessage({access_token:tok},'*');window.close();return;}
+      doLogin(tok);history.replaceState({},'',location.pathname);
+    } else if(sess?.tok){
+      doLogin(sess.tok,true);
+    }
+    window.addEventListener('message',e=>{if(e.data?.access_token)doLogin(e.data.access_token);});
+    loadMatches();
+  },[]);
+
+  useEffect(()=>{if(user)loadMyPreds();},[user]);
+  useEffect(()=>{if(tab==='leaderboard')loadBoard();},[tab]);
+
+  const doLogin=async(tok,silent=false)=>{
+    const u=await fetch(`${SUPA}/auth/v1/user`,{headers:{apikey:KEY,Authorization:`Bearer ${tok}`}}).then(r=>r.json()).catch(()=>null);
+    if(u?.id){S.set('hk_tok',tok);setSess({tok});setUser(u);if(!silent)setShowAuth(false);}
+    else{S.del('hk_tok');setSess(null);}
+  };
+  const doLogout=()=>{S.del('hk_tok');setSess(null);setUser(null);setMyPreds({});};
+  const getTok=()=>sess?.tok||S.get('hk_tok');
+
+  const loadMatches=async()=>{const d=await rq('GET','matches','?order=match_time.asc');setMatches(d||[]);};
+  const loadMyPreds=async()=>{
+    const tok=getTok();if(!tok||!user)return;
+    const d=await rq('GET','predictions',`?user_id=eq.${user.id}&select=match_id,pred_home,pred_away`,null,tok);
+    const m={};(d||[]).forEach(p=>{m[p.match_id]=p;});setMyPreds(m);
+  };
+  const loadBoard=async()=>{
+    const[pds,prs]=await Promise.all([rq('GET','predictions','?select=user_id,match_id,pred_home,pred_away'),rq('GET','profiles','?select=id,display_name,avatar_url')]);
+    setAllPreds(pds||[]);const m={};(prs||[]).forEach(p=>{m[p.id]=p;});setProfs(m);
+  };
+
+  const board=useMemo(()=>{
+    const mm={};matches.forEach(m=>{mm[m.id]=m;});
+    const up={};
+    (allPreds||[]).forEach(p=>{const m=mm[p.match_id];if(!m)return;const pts=calcPts(p,m)||0;if(!up[p.user_id])up[p.user_id]={pts:0,cnt:0};up[p.user_id].pts+=pts;up[p.user_id].cnt++;});
+    return Object.entries(up).map(([uid,s])=>({uid,...s,prof:profs[uid]})).sort((a,b)=>b.pts-a.pts);
+  },[allPreds,matches,profs]);
+
+  const filtered=useMemo(()=>{
+    const d0=new Date();d0.setHours(0,0,0,0);
+    const d1=new Date(d0);d1.setDate(d1.getDate()+1);
+    const d2=new Date(d0);d2.setDate(d2.getDate()+2);
+    const d7=new Date(d0);d7.setDate(d7.getDate()+7);
+    return matches.filter(m=>{const t=new Date(m.match_time);if(filter==='today')return t>=d0&&t<d1;if(filter==='tomorrow')return t>=d1&&t<d2;if(filter==='week')return t>=d0&&t<d7;return true;});
+  },[matches,filter]);
+  const grouped=useMemo(()=>byDay(filtered),[filtered]);
+
+  const signIn=async()=>{setBusy(true);setMsg('');const r=await authFetch('token?grant_type=password',{email:fd.email,password:fd.pwd});setBusy(false);r.access_token?doLogin(r.access_token):setMsg(r.error_description||r.message||'Неверный email или пароль');};
+  const signUp=async()=>{setBusy(true);setMsg('');const r=await authFetch('signup',{email:fd.email,password:fd.pwd,data:{full_name:fd.name}});setBusy(false);r.user?setMsg('✅ Письмо отправлено! Подтверди email и войди.'):setMsg(r.error_description||r.message||'Ошибка');};
+  const googleAuth=()=>window.open(`${SUPA}/auth/v1/authorize?provider=google&redirect_to=${encodeURIComponent(location.href.split('#')[0])}`,'gauth','width=500,height=700,top=60,left=160');
+
+  const setInp=(id,side,v)=>setInputs(p=>({...p,[id]:{...(p[id]||{}),[side]:v.replace(/\D/g,'')}}));
+  const savePred=async id=>{
+    if(!user){setShowAuth(true);return;}
+    const inp=inputs[id]||{},ex=myPreds[id];
+    const ph=parseInt(inp.h??(ex?.pred_home??'')),pa=parseInt(inp.a??(ex?.pred_away??''));
+    if(isNaN(ph)||isNaN(pa))return;
+    setSaving(p=>({...p,[id]:true}));
+    const tok=getTok();
+    ex?await rq('PATCH','predictions',`?user_id=eq.${user.id}&match_id=eq.${id}`,{pred_home:ph,pred_away:pa,updated_at:new Date().toISOString()},tok):await rq('POST','predictions','',{user_id:user.id,match_id:id,pred_home:ph,pred_away:pa},tok);
+    setMyPreds(p=>({...p,[id]:{pred_home:ph,pred_away:pa}}));
+    setSaving(p=>({...p,[id]:false}));setFlash(p=>({...p,[id]:true}));
+    setTimeout(()=>setFlash(p=>({...p,[id]:false})),2400);
+  };
+  const saveScore=async()=>{
+    const h=parseInt(adminS.h),a=parseInt(adminS.a);if(isNaN(h)||isNaN(a))return;
+    await rq('PATCH','matches',`?id=eq.${adminId}`,{home_score:h,away_score:a,status:'finished'},getTok());
+    setMatches(p=>p.map(m=>m.id===adminId?{...m,home_score:h,away_score:a,status:'finished'}:m));setAdminId(null);
+  };
+
+  const uName=user?.user_metadata?.full_name||user?.email?.split('@')[0]||'';
+  const uAv=user?.user_metadata?.avatar_url;
+
+  // ─── MATCH CARD ───────────────────────────────────────────────────────────
+  const MatchCard=({match:m})=>{
+    const pred=myPreds[m.id],inp=inputs[m.id]||{};
+    const hV=inp.h!==undefined?inp.h:(pred?.pred_home??'');
+    const aV=inp.a!==undefined?inp.a:(pred?.pred_away??'');
+    const past=new Date(m.match_time)<now;
+    const pts=pred&&m.home_score!=null?calcPts(pred,m):null;
+    const fin=m.status==='finished'&&m.home_score!=null;
+    const pc=pts===3?'var(--gold)':pts===1?'var(--grn)':pts===0?'var(--red)':null;
+    const tm=new Date(m.match_time).toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
+    const dt=new Date(m.match_time).toLocaleDateString('ru-RU',{day:'numeric',month:'short'});
+    const playoff=['QF','SF','Bronze','Gold'].includes(m.group_name);
+    const plbl={QF:'Четвертьфинал',SF:'Полуфинал',Bronze:'За бронзу',Gold:'Финал'}[m.group_name];
+    const hWin=fin&&m.home_score>m.away_score,aWin=fin&&m.away_score>m.home_score;
+    return(
+      <div className="card" style={{marginBottom:10,'--th':TCOLS[m.home_team]||'#333','--ta':TCOLS[m.away_team]||'#333'}}>
+        <div className="team-bar"/>
+        <div style={{padding:'18px 18px 16px'}}>
+          {/* Main row */}
+          <div style={{display:'flex',alignItems:'center',gap:10}}>
+            {/* Home */}
+            <div style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:6,position:'relative'}}>
+              {hWin&&<span className="pill pill-win" style={{position:'absolute',top:-6,right:0}}>Поб.</span>}
+              <div className="flag">{FLAGS[m.home_team]||'🏒'}</div>
+              <div className="team-name" style={{opacity:hWin||!fin?1:.55}}>{NAMES[m.home_team]||m.home_team}</div>
+            </div>
+            {/* Center */}
+            <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:6,minWidth:112}}>
+              {fin?(
+                <div style={{display:'flex',alignItems:'baseline',gap:10}}>
+                  <span className="t-score" style={{fontSize:'2.4rem',color:hWin?'var(--ink)':'var(--ink-3)'}}>{m.home_score}</span>
+                  <span style={{color:'var(--ink-4)',fontSize:'1.2rem',fontWeight:200,fontFamily:'var(--font-display)'}}>–</span>
+                  <span className="t-score" style={{fontSize:'2.4rem',color:aWin?'var(--ink)':'var(--ink-3)'}}>{m.away_score}</span>
+                </div>
+              ):(
+                <div className="vs-pill">VS</div>
+              )}
+              <div className="match-time">{tm} · {dt}</div>
+              {m.venue&&<div className="venue-text">{m.venue.split(',')[0]}</div>}
+              {!playoff&&m.group_name&&<span className="pill pill-group">Гр. {m.group_name}</span>}
+              {playoff&&<span className="pill pill-playoff">🏆 {plbl}</span>}
+            </div>
+            {/* Away */}
+            <div style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:6,position:'relative'}}>
+              {aWin&&<span className="pill pill-win" style={{position:'absolute',top:-6,left:0}}>Поб.</span>}
+              <div className="flag">{FLAGS[m.away_team]||'🏒'}</div>
+              <div className="team-name" style={{opacity:aWin||!fin?1:.55}}>{NAMES[m.away_team]||m.away_team}</div>
+            </div>
+          </div>
+
+          {/* Prediction input */}
+          {!past&&m.home_team!=='TBD'&&(
+            <div style={{marginTop:14,paddingTop:13,borderTop:'1px solid var(--bdr)',display:'flex',alignItems:'center',gap:9,flexWrap:'wrap'}}>
+              <span className="t-eyebrow" style={{color:'var(--ink-3)',flex:1,minWidth:60}}>Твой прогноз</span>
+              <input className="si" placeholder="0" maxLength={2} value={hV} onChange={e=>setInp(m.id,'h',e.target.value)}/>
+              <span style={{color:'var(--ink-4)',fontSize:'1.2rem',fontFamily:'var(--font-display)',fontWeight:700}}>:</span>
+              <input className="si" placeholder="0" maxLength={2} value={aV} onChange={e=>setInp(m.id,'a',e.target.value)}/>
+              <button className="btn" style={{flex:'1 1 120px',maxWidth:180,...(flash[m.id]?{background:'linear-gradient(135deg,var(--grn),#16a34a)'}:{})}} disabled={saving[m.id]} onClick={()=>savePred(m.id)}>
+                {saving[m.id]?'···':flash[m.id]?'✓ Saved':pred?'Обновить →':'Поставить →'}
+              </button>
+            </div>
+          )}
+
+          {/* Past match result */}
+          {past&&pred&&(
+            <div style={{marginTop:12,paddingTop:11,borderTop:'1px solid var(--bdr)',display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:8}}>
+              <span style={{color:'var(--ink-3)',fontSize:'.8rem'}}>Прогноз: <strong className="t-mono" style={{color:'var(--ink)',fontFamily:'var(--font-mono)'}}>{pred.pred_home}:{pred.pred_away}</strong></span>
+              {pts!==null&&<span className="pill" style={{background:`color-mix(in oklab, ${pc} 18%, transparent)`,color:pc,border:`1px solid color-mix(in oklab, ${pc} 35%, transparent)`,fontSize:'.7rem',padding:'4px 12px'}}>{pts===3?'🎯 +3 pts':pts===1?'✓ +1 pt':'✕ 0 pts'}</span>}
+            </div>
+          )}
+
+          {/* Admin: enter score */}
+          {user&&past&&!fin&&(
+            <div style={{marginTop:10,paddingTop:10,borderTop:'1px dashed var(--bdr)'}}>
+              {adminId===m.id?(
+                <div style={{display:'flex',gap:7,alignItems:'center',flexWrap:'wrap'}}>
+                  <span className="t-eyebrow" style={{color:'var(--ink-3)'}}>Итог</span>
+                  <input className="si" style={{width:44,height:40,fontSize:'1.05rem'}} placeholder="0" value={adminS.h} onChange={e=>setAdminS(p=>({...p,h:e.target.value.replace(/\D/g,'')}))}/>
+                  <span style={{color:'var(--ink-4)'}}>:</span>
+                  <input className="si" style={{width:44,height:40,fontSize:'1.05rem'}} placeholder="0" value={adminS.a} onChange={e=>setAdminS(p=>({...p,a:e.target.value.replace(/\D/g,'')}))}/>
+                  <button className="btn" style={{padding:'9px 14px',fontSize:'.75rem'}} onClick={saveScore}>Записать</button>
+                  <button className="ghost" style={{padding:'7px 11px'}} onClick={()=>setAdminId(null)}>✕</button>
+                </div>
+              ):(
+                <button className="ghost" style={{padding:'4px 12px',fontSize:'.7rem'}} onClick={()=>{setAdminId(m.id);setAdminS({h:'',a:''});}}>Ввести результат</button>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  // ─── AUTH MODAL ───────────────────────────────────────────────────────────
+  const AuthModal=()=>(
+    <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,.82)',backdropFilter:'blur(8px)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:200,padding:16,animation:'popIn .2s ease'}} onClick={e=>{if(e.target===e.currentTarget)setShowAuth(false);}}>
+      <div style={{background:'var(--surf-elev)',border:'1px solid var(--bdr-2)',borderRadius:'var(--radius-xl)',padding:'32px 28px',width:'100%',maxWidth:400,boxShadow:'0 32px 100px rgba(0,0,0,.7)'}}>
+        <div style={{textAlign:'center',marginBottom:24}}>
+          <div className="logo-mark" style={{width:52,height:52,margin:'0 auto 14px',fontSize:'1.6rem'}}>🏒</div>
+          <h2 className="t-display" style={{color:'var(--ink)',fontSize:'1.5rem',margin:'0 0 6px'}}>{mode==='signin'?'Добро пожаловать':'Регистрация'}</h2>
+          <p style={{color:'var(--ink-3)',fontSize:'.85rem',margin:0}}>{mode==='signin'?'Войди, чтобы делать прогнозы':'Создай аккаунт и участвуй'}</p>
+        </div>
+        <div style={{display:'flex',flexDirection:'column',gap:10}}>
+          {mode==='signup'&&<input className="ai" placeholder="Имя (как тебя называть)" value={fd.name} onChange={e=>setFd(p=>({...p,name:e.target.value}))}/>}
+          <input className="ai" placeholder="Email" type="email" value={fd.email} onChange={e=>setFd(p=>({...p,email:e.target.value}))}/>
+          <input className="ai" placeholder="Пароль (мин. 6 символов)" type="password" value={fd.pwd} onChange={e=>setFd(p=>({...p,pwd:e.target.value}))} onKeyDown={e=>e.key==='Enter'&&(mode==='signin'?signIn():signUp())}/>
+          {msg&&<p style={{color:msg.startsWith('✅')?'var(--grn)':'var(--red)',margin:0,fontSize:'.82rem'}}>{msg}</p>}
+          <button className="btn" style={{width:'100%',padding:'14px',marginTop:4,fontSize:'.88rem'}} disabled={busy} onClick={mode==='signin'?signIn:signUp}>
+            {busy?'···':mode==='signin'?'Войти':'Зарегистрироваться'}
+          </button>
+          <div style={{display:'flex',alignItems:'center',gap:10,margin:'6px 0'}}>
+            <div style={{flex:1,height:'1px',background:'var(--bdr)'}}/><span className="t-eyebrow" style={{color:'var(--ink-4)'}}>или</span><div style={{flex:1,height:'1px',background:'var(--bdr)'}}/>
+          </div>
+          <button onClick={googleAuth} style={{background:'#fff',color:'#1e1e1e',border:'none',borderRadius:'var(--radius)',padding:'13px',fontWeight:700,cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',gap:10,fontSize:'.88rem',transition:'all .15s',fontFamily:'var(--font-body)'}} onMouseEnter={e=>e.currentTarget.style.boxShadow='0 6px 24px rgba(0,0,0,.3)'} onMouseLeave={e=>e.currentTarget.style.boxShadow=''}>
+            <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            Continue with Google
+          </button>
+          <p style={{color:'var(--ink-3)',textAlign:'center',fontSize:'.82rem',marginTop:6}}>
+            {mode==='signin'?<>Нет аккаунта? <span style={{color:'var(--acc)',cursor:'pointer',fontWeight:700}} onClick={()=>{setMode('signup');setMsg('');}}>Зарегистрируйся</span></>:<>Уже есть? <span style={{color:'var(--acc)',cursor:'pointer',fontWeight:700}} onClick={()=>{setMode('signin');setMsg('');}}>Войди</span></>}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+
+  // ─── LEADERBOARD ─────────────────────────────────────────────────────────
+  const Leaderboard=()=>{
+    const podium=[
+      {rank:0,label:'1st',emoji:'🥇',h:140,sz:48,clr:'var(--gold)'},
+      {rank:1,label:'2nd',emoji:'🥈',h:112,sz:40,clr:'#c8cbd4'},
+      {rank:2,label:'3rd',emoji:'🥉',h:92,sz:36,clr:'#c48a55'},
+    ];
+    const Av=({p,sz,c})=>p?.avatar_url?<img src={p.avatar_url} style={{width:sz,height:sz,borderRadius:'50%',border:`2px solid ${c}`,display:'block',margin:'0 auto 8px',objectFit:'cover'}} alt=""/>:<div style={{width:sz,height:sz,borderRadius:'50%',background:'var(--surf-elev)',border:`1.5px solid ${c}`,display:'flex',alignItems:'center',justifyContent:'center',color:c,fontWeight:800,fontFamily:'var(--font-display)',fontSize:sz*.38,margin:'0 auto 8px'}}>{(p?.display_name||'?')[0].toUpperCase()}</div>;
+    return(
+      <div>
+        {board.length===0?(
+          <div className="empty">
+            <div className="empty-icon">🏆</div>
+            <div className="empty-title">Ещё нет прогнозов</div>
+            <div className="empty-sub">Будь первым — поставь прогноз на матч</div>
+          </div>
+        ):(
+          <>
+            {board.length>=3&&(
+              <div style={{display:'flex',alignItems:'flex-end',justifyContent:'center',gap:8,marginBottom:22}}>
+                {[1,0,2].map(rank=>{const item=board[rank];const pc=podium[rank];return(
+                  <div key={rank} className="card" style={{flex:1,padding:'16px 8px',textAlign:'center',minHeight:pc.h,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:2,borderColor:rank===0?pc.clr+'44':'var(--card-bdr)'}}>
+                    <div style={{fontSize:rank===0?30:24,marginBottom:4}}>{pc.emoji}</div>
+                    <Av p={item.prof} sz={pc.sz} c={pc.clr}/>
+                    <div style={{color:'var(--ink)',fontFamily:'var(--font-display)',fontWeight:800,fontSize:'.85rem',maxWidth:100,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',letterSpacing:'var(--display-tracking)',textTransform:'uppercase'}}>{item.prof?.display_name||'Аноним'}</div>
+                    <div style={{color:pc.clr,fontWeight:900,fontFamily:'var(--font-display)',fontSize:rank===0?'1.45rem':'1.2rem',lineHeight:1,marginTop:5,fontVariantNumeric:'tabular-nums'}}>{item.pts}<span style={{fontSize:'.58rem',color:'var(--ink-4)',fontWeight:700,marginLeft:3,letterSpacing:'.1em'}}>PTS</span></div>
+                  </div>
+                );})}
+              </div>
+            )}
+            {board.slice(3).map((item,i)=>(
+              <div key={item.uid} className="lb-row">
+                <div className="lb-rank">#{i+4}</div>
+                {item.prof?.avatar_url?<img src={item.prof.avatar_url} style={{width:36,height:36,borderRadius:'50%',objectFit:'cover',border:'1px solid var(--bdr)'}} alt=""/>:<div style={{width:36,height:36,borderRadius:'50%',background:'var(--surf-elev)',border:'1px solid var(--bdr)',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--acc)',fontWeight:800,fontFamily:'var(--font-display)',fontSize:'.9rem'}}>{(item.prof?.display_name||'?')[0].toUpperCase()}</div>}
+                <div style={{flex:1,minWidth:0}}>
+                  <div style={{color:'var(--ink)',fontWeight:700,fontSize:'.93rem',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{item.prof?.display_name||'Аноним'}</div>
+                  <div style={{color:'var(--ink-3)',fontSize:'.72rem',marginTop:2}}>{item.cnt} прогноз{item.cnt%10===1&&item.cnt%100!==11?'':item.cnt%10>=2&&item.cnt%10<=4&&(item.cnt%100<10||item.cnt%100>20)?'а':'ов'}</div>
+                </div>
+                <div className="lb-pts">{item.pts}<span style={{fontSize:'.58rem',color:'var(--ink-4)',fontWeight:700,marginLeft:3,letterSpacing:'.1em'}}>PTS</span></div>
+              </div>
+            ))}
+            <div className="card" style={{marginTop:16,padding:'14px 18px',textAlign:'center'}}>
+              <span style={{color:'var(--ink-3)',fontSize:'.78rem',lineHeight:1.6}}>🎯 <strong style={{color:'var(--gold)'}}>+3 pts</strong> — точный счёт &nbsp;·&nbsp; ✓ <strong style={{color:'var(--grn)'}}>+1 pt</strong> — победитель &nbsp;·&nbsp; ✕ <strong style={{color:'var(--red)'}}>0</strong> — промах</span>
+            </div>
+          </>
+        )}
+      </div>
+    );
+  };
+
+  // ─── MAIN RENDER ─────────────────────────────────────────────────────────
+  return(
+    <div style={{minHeight:'100vh',position:'relative'}}>
+      <Bg/>
+
+      {/* Header */}
+      <div className="header">
+        <div style={{display:'flex',alignItems:'center',gap:12}}>
+          <div className="logo-mark">🏒</div>
+          <div>
+            <div className="brand-title">IIHF WM 2026</div>
+            <div className="brand-eyebrow">Прогнозы · Switzerland</div>
+          </div>
+        </div>
+        {user?(
+          <div style={{display:'flex',alignItems:'center',gap:9}}>
+            {uAv?<img src={uAv} style={{width:32,height:32,borderRadius:'50%',border:'1.5px solid var(--acc)',objectFit:'cover'}} alt=""/>:<div style={{width:32,height:32,borderRadius:'50%',background:'var(--surf-elev)',border:'1.5px solid var(--bdr-2)',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--acc)',fontWeight:800,fontFamily:'var(--font-display)',fontSize:'.85rem'}}>{(uName[0]||'?').toUpperCase()}</div>}
+            <span style={{color:'var(--ink-2)',fontSize:'.85rem',fontWeight:700,maxWidth:110,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{uName}</span>
+            <button className="ghost" onClick={doLogout}>Выйти</button>
+          </div>
+        ):(
+          <button className="btn" style={{padding:'9px 20px',animation:'glowPulse 2.2s ease-in-out infinite'}} onClick={()=>setShowAuth(true)}>Войти</button>
+        )}
+      </div>
+
+      {/* Tabs */}
+      <div style={{display:'flex',justifyContent:'center',gap:8,padding:'18px 18px 0',position:'relative',zIndex:1}}>
+        {[['matches','Матчи'],['leaderboard','Лидерборд']].map(([id,l])=>(
+          <button key={id} className="tab" data-active={tab===id} onClick={()=>setTab(id)}>{l}</button>
+        ))}
+      </div>
+
+      {/* Content */}
+      <div style={{maxWidth:680,margin:'0 auto',padding:'18px 14px 90px',position:'relative',zIndex:1}}>
+        {tab==='matches'&&(
+          <>
+            <Countdown/>
+            <div style={{display:'flex',gap:7,marginBottom:16,flexWrap:'wrap'}}>
+              {[['today','Сегодня'],['tomorrow','Завтра'],['week','Неделя'],['all','Все матчи']].map(([id,l])=>(
+                <button key={id} className="flt" data-active={filter===id} onClick={()=>setFilter(id)}>{l}</button>
+              ))}
+            </div>
+            {grouped.length===0?(
+              <div className="empty">
+                <div className="empty-icon">🏒</div>
+                <div className="empty-title">Матчей нет</div>
+                <div className="empty-sub">Турнир стартует <strong style={{color:'var(--acc)'}}>15 мая 2026</strong></div>
+                <div className="empty-sub" style={{marginTop:6,fontSize:'.78rem',color:'var(--ink-4)'}}>Переключись на «Все матчи» — увидишь расписание</div>
+              </div>
+            ):(
+              grouped.map(([day,ms])=>(
+                <div key={day} style={{marginBottom:24}}>
+                  <div className="day-divider">
+                    <div className="day-divider-line"/>
+                    <span className="day-divider-label">{day}</span>
+                    <div className="day-divider-line"/>
+                  </div>
+                  {ms.map(m=><MatchCard key={m.id} match={m}/>)}
+                </div>
+              ))
+            )}
+          </>
+        )}
+        {tab==='leaderboard'&&<Leaderboard/>}
+      </div>
+
+      <ThemeSwitcher theme={theme} onChange={setTheme}/>
+      {showAuth&&<AuthModal/>}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</head>
+<body></body>
+</html>
