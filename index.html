@@ -547,7 +547,8 @@ function App(){
     const m={};(d||[]).forEach(p=>{m[p.match_id]=p;});setMyPreds(m);
   };
   const loadBoard=async()=>{
-    const[pds,prs]=await Promise.all([rq('GET','predictions','?select=user_id,match_id,pred_home,pred_away'),rq('GET','profiles','?select=id,display_name,avatar_url')]);
+    const[pds,prs,ms]=await Promise.all([rq('GET','predictions','?select=user_id,match_id,pred_home,pred_away'),rq('GET','profiles','?select=id,display_name,avatar_url'),rq('GET','matches','?order=match_time.asc')]);
+    if(ms)setMatches(ms);
     setAllPreds(pds||[]);const m={};(prs||[]).forEach(p=>{m[p.id]=p;});setProfs(m);
   };
 
@@ -749,9 +750,11 @@ function App(){
                 );})}
               </div>
             )}
-            {board.slice(3).map((item,i)=>(
+            {board.slice(board.length>=3?3:0).map((item,i)=>{
+              const rank=(board.length>=3?3:0)+i;
+              return(
               <div key={item.uid} className="lb-row" style={{animationDelay:(i*.05)+'s',opacity:0,animation:`slideInR .5s cubic-bezier(.2,.8,.2,1) ${i*.05}s forwards`}}>
-                <div className="lb-rank">#{i+4}</div>
+                <div className="lb-rank">#{rank+1}</div>
                 {item.prof?.avatar_url?<img src={item.prof.avatar_url} style={{width:36,height:36,borderRadius:'50%',objectFit:'cover',border:'1px solid var(--bdr)'}} alt=""/>:<div style={{width:36,height:36,borderRadius:'50%',background:'var(--surf-elev)',border:'1px solid var(--bdr)',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--acc)',fontWeight:800,fontFamily:'var(--font-display)',fontSize:'.9rem'}}>{(item.prof?.display_name||'?')[0].toUpperCase()}</div>}
                 <div style={{flex:1,minWidth:0}}>
                   <div style={{color:'var(--ink)',fontWeight:700,fontSize:'.93rem',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{item.prof?.display_name||'Аноним'}</div>
@@ -759,7 +762,8 @@ function App(){
                 </div>
                 <div className="lb-pts">{item.pts}<span style={{fontSize:'.58rem',color:'var(--ink-4)',fontWeight:700,marginLeft:3,letterSpacing:'.1em'}}>PTS</span></div>
               </div>
-            ))}
+              );
+            })}
             <div className="card" style={{marginTop:16,padding:'14px 18px',textAlign:'center'}}>
               <span style={{color:'var(--ink-3)',fontSize:'.78rem',lineHeight:1.6}}>🎯 <strong style={{color:'var(--gold)'}}>+3 pts</strong> — точный счёт &nbsp;·&nbsp; ✓ <strong style={{color:'var(--grn)'}}>+1 pt</strong> — победитель &nbsp;·&nbsp; ✕ <strong style={{color:'var(--red)'}}>0</strong> — промах</span>
             </div>
