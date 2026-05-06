@@ -174,7 +174,6 @@ html[data-theme="ice"] .card{backdrop-filter:blur(18px) saturate(140%);-webkit-b
 html[data-theme="broadcast"] .card:hover{box-shadow:0 14px 44px rgba(230,30,45,.14),0 2px 0 rgba(255,255,255,.04) inset}
 html[data-theme="ice"] .card:hover{box-shadow:0 14px 54px rgba(94,200,255,.18),0 1px 0 rgba(255,255,255,.08) inset}
 html[data-theme="stadium"] .card:hover{box-shadow:0 14px 44px rgba(255,204,77,.16),0 1px 0 rgba(255,220,122,.07) inset}
-/* Gloss sweep on hover */
 .card::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.06),transparent);transform:skewX(-18deg);transition:left .8s cubic-bezier(.2,.8,.2,1);pointer-events:none;z-index:2}
 .card:hover::after{left:120%}
 html[data-theme="ice"] .card::after{display:none}
@@ -381,7 +380,6 @@ const NAMES={FIN:'Finland',GER:'Germany',CAN:'Canada',SWE:'Sweden',USA:'USA',SUI
 const TCOLS={FIN:'#003899',GER:'#1a1a1a',CAN:'#cc1122',SWE:'#006aa7',USA:'#002868',SUI:'#cc1122',CZE:'#d7141a',DEN:'#c60c30',GBR:'#012169',AUT:'#ed2939',SVK:'#0b4ea2',NOR:'#ef2b2d',HUN:'#588157',LAT:'#8b2635',SLO:'#003da5',ITA:'#009246',TBD:'#333'};
 const PTCLS=Array.from({length:15},(_,i)=>({e:['🏒','❄️','⭐','🧊','✨','❄️'][i%6],l:((i*37+13)%97)+'%',t:((i*23+7)%93)+'%',s:(i%3)*6+11,o:(i%4)*.022+.03,d:(i%4)*2+6,dl:-(i*1.4),a:`fl${i%3}`}));
 
-// Storage: localStorage with graceful fallback
 const S={
   get:k=>{try{return localStorage.getItem(k);}catch{return null;}},
   set:(k,v)=>{try{localStorage.setItem(k,v);}catch{}},
@@ -403,7 +401,6 @@ const calcPts=(p,m)=>{
 };
 const byDay=arr=>{const g={};arr.forEach(m=>{const k=new Date(m.match_time).toLocaleDateString('ru-RU',{weekday:'long',day:'numeric',month:'long'});if(!g[k])g[k]=[];g[k].push(m);});return Object.entries(g);};
 
-// Animated background with blobs + grid + floating particles
 const Bg=memo(()=>(
   <>
     <div className="blob blob-1"/>
@@ -416,7 +413,6 @@ const Bg=memo(()=>(
   </>
 ));
 
-// Confetti burst
 const ConfettiBurst=({trigger})=>{
   const [pieces,setPieces]=useState([]);
   useEffect(()=>{
@@ -451,7 +447,6 @@ const ConfettiBurst=({trigger})=>{
   );
 };
 
-// Theme switcher
 const ThemeSwitcher=({theme,onChange})=>(
   <div className="theme-switcher" role="group" aria-label="Theme">
     {[['broadcast','Broadcast'],['ice','Ice'],['stadium','Stadium']].map(([id,l])=>(
@@ -460,7 +455,6 @@ const ThemeSwitcher=({theme,onChange})=>(
   </div>
 );
 
-// Tournament countdown
 const Countdown=()=>{
   const [t,setT]=useState(null);
   useEffect(()=>{
@@ -595,7 +589,6 @@ function App(){
   const uName=user?.user_metadata?.full_name||user?.email?.split('@')[0]||'';
   const uAv=user?.user_metadata?.avatar_url;
 
-  // ─── MATCH CARD ───────────────────────────────────────────────────────────
   const MatchCard=({match:m})=>{
     const pred=myPreds[m.id],inp=inputs[m.id]||{};
     const hV=inp.h!==undefined?inp.h:(pred?.pred_home??'');
@@ -613,15 +606,12 @@ function App(){
       <div className="card" style={{marginBottom:10,'--th':TCOLS[m.home_team]||'#333','--ta':TCOLS[m.away_team]||'#333'}}>
         <div className="team-bar"/>
         <div style={{padding:'18px 18px 16px'}}>
-          {/* Main row */}
           <div style={{display:'flex',alignItems:'center',gap:10}}>
-            {/* Home */}
             <div style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:6,position:'relative'}}>
               {hWin&&<span className="pill pill-win" style={{position:'absolute',top:-6,right:0}}>Поб.</span>}
               <div className="flag">{FLAGS[m.home_team]||'🏒'}</div>
               <div className="team-name" style={{opacity:hWin||!fin?1:.55}}>{NAMES[m.home_team]||m.home_team}</div>
             </div>
-            {/* Center */}
             <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:6,minWidth:112}}>
               {fin?(
                 <div style={{display:'flex',alignItems:'baseline',gap:10}}>
@@ -637,7 +627,6 @@ function App(){
               {!playoff&&m.group_name&&<span className="pill pill-group">Гр. {m.group_name}</span>}
               {playoff&&<span className="pill pill-playoff">🏆 {plbl}</span>}
             </div>
-            {/* Away */}
             <div style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:6,position:'relative'}}>
               {aWin&&<span className="pill pill-win" style={{position:'absolute',top:-6,left:0}}>Поб.</span>}
               <div className="flag">{FLAGS[m.away_team]||'🏒'}</div>
@@ -645,7 +634,6 @@ function App(){
             </div>
           </div>
 
-          {/* Prediction input */}
           {!past&&m.home_team!=='TBD'&&(
             <div style={{marginTop:14,paddingTop:13,borderTop:'1px solid var(--bdr)',display:'flex',alignItems:'center',gap:9,flexWrap:'wrap'}}>
               <span className="t-eyebrow" style={{color:'var(--ink-3)',flex:1,minWidth:60}}>Твой прогноз</span>
@@ -658,7 +646,6 @@ function App(){
             </div>
           )}
 
-          {/* Past match result */}
           {past&&pred&&(
             <div style={{marginTop:12,paddingTop:11,borderTop:'1px solid var(--bdr)',display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:8}}>
               <span style={{color:'var(--ink-3)',fontSize:'.8rem'}}>Прогноз: <strong className="t-mono" style={{color:'var(--ink)',fontFamily:'var(--font-mono)'}}>{pred.pred_home}:{pred.pred_away}</strong></span>
@@ -666,7 +653,6 @@ function App(){
             </div>
           )}
 
-          {/* Admin: enter score */}
           {user&&past&&!fin&&(
             <div style={{marginTop:10,paddingTop:10,borderTop:'1px dashed var(--bdr)'}}>
               {adminId===m.id?(
@@ -688,7 +674,6 @@ function App(){
     );
   };
 
-  // ─── AUTH MODAL ───────────────────────────────────────────────────────────
   const AuthModal=()=>(
     <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,.82)',backdropFilter:'blur(8px)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:200,padding:16,animation:'popIn .2s ease'}} onClick={e=>{if(e.target===e.currentTarget)setShowAuth(false);}}>
       <div style={{background:'var(--surf-elev)',border:'1px solid var(--bdr-2)',borderRadius:'var(--radius-xl)',padding:'32px 28px',width:'100%',maxWidth:400,boxShadow:'0 32px 100px rgba(0,0,0,.7)'}}>
@@ -720,7 +705,6 @@ function App(){
     </div>
   );
 
-  // ─── LEADERBOARD ─────────────────────────────────────────────────────────
   const Leaderboard=()=>{
     const podium=[
       {rank:0,label:'1st',emoji:'🥇',h:140,sz:48,clr:'var(--gold)'},
@@ -773,13 +757,11 @@ function App(){
     );
   };
 
-  // ─── MAIN RENDER ─────────────────────────────────────────────────────────
   return(
     <div style={{minHeight:'100vh',position:'relative'}}>
       <Bg/>
       <ConfettiBurst trigger={confettiT}/>
 
-      {/* Header */}
       <div className="header">
         <div style={{display:'flex',alignItems:'center',gap:12}}>
           <div className="logo-mark">🏒</div>
@@ -799,14 +781,12 @@ function App(){
         )}
       </div>
 
-      {/* Tabs */}
       <div style={{display:'flex',justifyContent:'center',gap:8,padding:'18px 18px 0',position:'relative',zIndex:1}}>
         {[['matches','Матчи'],['leaderboard','Лидерборд']].map(([id,l])=>(
           <button key={id} className="tab" data-active={tab===id} onClick={()=>setTab(id)}>{l}</button>
         ))}
       </div>
 
-      {/* Content */}
       <div style={{maxWidth:680,margin:'0 auto',padding:'18px 14px 90px',position:'relative',zIndex:1}}>
         {tab==='matches'&&(
           <>
